@@ -96,15 +96,15 @@ int main(void)
   char message[] = "MSG";
   int message_size = strlen(message);
 
-  uart_transmit_test_begin();
-  if (HAL_UART_Transmit(&huart2, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
-    Error_Handler();
-  uart_transmit_test_end();
-
   uart_receive_test_begin();
   if (HAL_UART_Receive(&huart2, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
     Error_Handler();
   uart_receive_test_end();
+
+  uart_transmit_test_begin();
+  if (HAL_UART_Transmit(&huart2, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
+    Error_Handler();
+  uart_transmit_test_end();
 
   /* USER CODE END 2 */
 
