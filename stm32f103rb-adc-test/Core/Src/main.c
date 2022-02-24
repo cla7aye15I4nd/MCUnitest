@@ -55,7 +55,15 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+volatile static char test_flag = 0;
+void adc_calibration_test_begin(void) { test_flag = 1; }
+void adc_calibration_test_end(void) { test_flag = 0; }
 
+void adc_start_test_begin(void) { test_flag = 1; }
+void adc_start_test_end(void) { test_flag = 0; }
+
+void adc_poll_for_conversion_test_begin(void) { test_flag = 1; }
+void adc_poll_for_conversion_test_end(void) { test_flag = 0; }
 /* USER CODE END 0 */
 
 /**
@@ -89,14 +97,20 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
+  adc_calibration_test_begin();
   if (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK)
     Error_Handler();
+  adc_calibration_test_end();
 
+  adc_start_test_begin();
   if (HAL_ADC_Start(&hadc1) != HAL_OK)
     Error_Handler();
-    
+  adc_start_test_end();
+
+  adc_poll_for_conversion_test_begin();
   if (HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY))
     Error_Handler();
+  adc_poll_for_conversion_test_end();
 
   /* USER CODE END 2 */
 
