@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# STM32CubeMX file
+.mxproject
+
+# Build Dierctory
+*/build
