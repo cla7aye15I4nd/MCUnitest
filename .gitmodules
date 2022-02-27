@@ -4,3 +4,6 @@
 [submodule "library/FRDM-K64F"]
 	path = library/FRDM-K64F
 	url = https://github.com/cla7aye15I4nd/FRDM-K64F
+[submodule "library/STM32CubeF4"]
+	path = library/STM32CubeF4
+	url = https://github.com/STMicroelectronics/STM32CubeF4.git
