@@ -93,18 +93,18 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
-  char message[] = "MSG";
+  char message[] = "A";
   int message_size = strlen(message);
-
-  spi_receive_test_begin();
-  if (HAL_SPI_Receive(&hspi1, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
-    Error_Handler();
-  spi_receive_test_end();
 
   spi_transmit_test_begin();
   if (HAL_SPI_Transmit(&hspi1, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
     Error_Handler();
   spi_transmit_test_end();
+
+  spi_receive_test_begin();
+  if (HAL_SPI_Receive(&hspi1, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
+    Error_Handler();
+  spi_receive_test_end();
 
   /* USER CODE END 2 */
 
@@ -112,9 +112,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    HAL_SPI_Transmit(&hspi1, (uint8_t *) message, message_size, HAL_MAX_DELAY);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
