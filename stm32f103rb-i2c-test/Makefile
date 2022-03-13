@@ -22,7 +22,7 @@ TARGET = stm32f103rb-i2c-test
 # debug build?
 DEBUG = 1
 # optimization
-OPT = -Og
+OPT = -O0
 
 
 #######################################
