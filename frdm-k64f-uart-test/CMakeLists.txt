@@ -32,6 +32,8 @@ include(${ProjDirPath}/./flags.cmake)
 include(${ProjDirPath}/./config.cmake)
 
 add_executable(${MCUX_SDK_PROJECT_NAME}
+"${ProjDirPath}/board/test.c"
+"${ProjDirPath}/board/test.h"
 "${ProjDirPath}/board/board.c"
 "${ProjDirPath}/board/board.h"
 "${ProjDirPath}/board/clock_config.c"
