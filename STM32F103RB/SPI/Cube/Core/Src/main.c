@@ -55,11 +55,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-volatile static char test_flag = 0;
-void spi_transmit_test_begin(void) { test_flag = 1; }
-void spi_transmit_test_end  (void) { test_flag = 0; }
-void spi_receive_test_begin (void) { test_flag = 1; }
-void spi_receive_test_end   (void) { test_flag = 0; }
 /* USER CODE END 0 */
 
 /**
@@ -96,16 +91,12 @@ int main(void)
   char message[] = "A";
   int message_size = strlen(message);
 
-  spi_transmit_test_begin();
   if (HAL_SPI_Transmit(&hspi1, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
     Error_Handler();
-  spi_transmit_test_end();
-
-  spi_receive_test_begin();
+  
   if (HAL_SPI_Receive(&hspi1, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
     Error_Handler();
-  spi_receive_test_end();
-
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */

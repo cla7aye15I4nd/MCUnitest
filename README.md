@@ -11,6 +11,6 @@
 | I2C   |                                            |           |         |           |
 | USART | [Receive/Transmit](STM32F103RB/USART/Cube) |           |         |           |
 | SDIO  |                                            |           |         |           |
-| SPI   |                                            |           |         |           |
+| SPI   | [Receive/Transmit](STM32F103RB/SPI/Cube)   |           |         |           |
 | Timer |                                            |           |         |           |
 
