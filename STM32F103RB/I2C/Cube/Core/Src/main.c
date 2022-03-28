@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,11 +55,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-volatile static char test_flag = 0;
-void i2c_transmit_test_begin(void) { test_flag = 1; }
-void i2c_transmit_test_end  (void) { test_flag = 0; }
-void i2c_receive_test_begin (void) { test_flag = 1; }
-void i2c_receive_test_end   (void) { test_flag = 0; }
 /* USER CODE END 0 */
 
 /**
@@ -92,12 +87,16 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  
-  i2c_transmit_test_begin();
-  if (HAL_I2C_Master_Transmit(&hi2c1, 0x20 << 1, "A", 1, HAL_MAX_DELAY) != HAL_OK)
-    Error_Handler();
-  i2c_transmit_test_end();
 
+  char message[] = "A";
+  int message_size = strlen(message);
+  
+  if (HAL_I2C_Master_Transmit(&hi2c1, 0x20 << 1, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
+    Error_Handler();
+
+  if (HAL_I2C_Master_Receive(&hi2c1, 0x20 << 1, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
+    Error_Handler();
+    
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,6 +104,7 @@ int main(void)
   while (1)
   {    
     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+    HAL_I2C_Master_Transmit(&hi2c1, 0x20 << 1, (uint8_t *) message, message_size, HAL_MAX_DELAY);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
