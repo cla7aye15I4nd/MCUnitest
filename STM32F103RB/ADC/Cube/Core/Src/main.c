@@ -20,11 +20,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,15 +56,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-volatile static char test_flag = 0;
-void adc_calibration_test_begin(void) { test_flag = 1; }
-void adc_calibration_test_end(void) { test_flag = 0; }
-
-void adc_start_test_begin(void) { test_flag = 1; }
-void adc_start_test_end(void) { test_flag = 0; }
-
-void adc_poll_for_conversion_test_begin(void) { test_flag = 1; }
-void adc_poll_for_conversion_test_end(void) { test_flag = 0; }
 /* USER CODE END 0 */
 
 /**
@@ -95,23 +87,18 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_ADC1_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  adc_calibration_test_begin();
   if (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK)
     Error_Handler();
-  adc_calibration_test_end();
-
-  adc_start_test_begin();
+  
   if (HAL_ADC_Start(&hadc1) != HAL_OK)
     Error_Handler();
-  adc_start_test_end();
-
-  adc_poll_for_conversion_test_begin();
-  if (HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY))
+  
+  if (HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY) != HAL_OK)
     Error_Handler();
-  adc_poll_for_conversion_test_end();
-
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,6 +108,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    int32_t adc_value = HAL_ADC_GetValue(&hadc1);
+  
+    char buf[0x100];
+    int size = sprintf(buf, "adc_value = %d\n", adc_value);
+    HAL_UART_Transmit(&huart2, buf, size, HAL_MAX_DELAY);
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
