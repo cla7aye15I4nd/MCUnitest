@@ -44,9 +44,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-volatile static char test_flag = 0;
-void pwm_test_begin(void) { test_flag = 1; }
-void pwm_test_end(void) { test_flag = 0; }
 
 /* USER CODE END PV */
 
@@ -92,11 +89,10 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
-  pwm_test_begin();
   if (HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1) != HAL_OK)
     Error_Handler();
-  pwm_test_end();
-
+  
+  int32_t CH1_DC = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,6 +102,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    while (CH1_DC < 65535) {
+		  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, CH1_DC);
+      CH1_DC += 70;		  
+      HAL_Delay(1);
+	  }
+
+	  while (CH1_DC) {
+		  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, CH1_DC);
+      CH1_DC -= 70;		  
+      HAL_Delay(1);
+	  }
+
+    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	  HAL_Delay(200);
   }
   /* USER CODE END 3 */
 }
