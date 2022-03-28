@@ -5,7 +5,7 @@
 |       |                    STM32F1/F4                    | SAM3A/SAM3X |                  FRDM-K64F                  |
 | :---: | :----------------------------------------------: | :---------: | :-----------------------------------------: |
 |  ADC  |  [Calibration/Conversion](STM32F103RB/ADC/Cube)  |             |                                             |
-|  CAN  |                                                  |             |                                             |
+|  CAN  |     [Receive/Transmit](STM32F429ZI/CAN/Cube)     |             |                                             |
 |  DAC  | [Digital-to-Analog Output](STM32F429ZI/DAC/Cube) |             |                                             |
 |  ETH  |                                                  |             |                                             |
 | GPIO  |                                                  |             |                                             |
