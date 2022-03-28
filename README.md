@@ -9,7 +9,7 @@
 |  DAC  | [Digital-to-Analog Output](STM32F429ZI/DAC/Cube) | [Digital-to-Analog Output](SAM3X8E/DAC/Arduino) |                                             |
 |  ETH  |                                                  |                                                 |                                             |
 | GPIO  |                                                  |                                                 |                                             |
-|  PWM  |      [Configuration](STM32F103RB/PWM/Cube)       |                                                 |                                             |
+|  PWM  |      [Configuration](STM32F103RB/PWM/Cube)       |          [Dimmer](SAM3X8E/PWM/Arduino)          |                                             |
 |  I2C  |     [Receive/Transmit](STM32F103RB/I2C/Cube)     |                                                 |                                             |
 | USART |    [Receive/Transmit](STM32F103RB/USART/Cube)    |                                                 | [Receive/Transmit](FRDM-K64F/UART/Standard) |
 | SDIO  |                                                  |                                                 |                                             |
