@@ -50,7 +50,6 @@ board: FRDM-K64F
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 
-#include "test.h"
 #include "fsl_smc.h"
 #include "clock_config.h"
 
@@ -197,11 +196,9 @@ void BOARD_BootClockRUN(void)
     /* Configure FLL external reference divider (FRDIV). */
     CLOCK_CONFIG_SetFllExtRefDiv(mcgConfig_BOARD_BootClockRUN.frdiv);
     /* Set MCG to PEE mode. */
-    mcg_test_begin();
     CLOCK_BootToPeeMode(mcgConfig_BOARD_BootClockRUN.oscsel,
                         kMCG_PllClkSelPll0,
                         &mcgConfig_BOARD_BootClockRUN.pll0Config);
-    mcg_test_end();
     /* Set the clock configuration in SIM module. */
     CLOCK_SetSimConfig(&simConfig_BOARD_BootClockRUN);
     /* Set SystemCoreClock variable. */
