@@ -55,11 +55,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-volatile static char test_flag = 0;
-void uart_transmit_test_begin(void) { test_flag = 1; }
-void uart_transmit_test_end  (void) { test_flag = 0; }
-void uart_receive_test_begin (void) { test_flag = 1; }
-void uart_receive_test_end   (void) { test_flag = 0; }
 /* USER CODE END 0 */
 
 /**
@@ -96,16 +91,12 @@ int main(void)
   char message[] = "A";
   int message_size = strlen(message);
 
-  uart_transmit_test_begin();
   if (HAL_UART_Transmit(&huart2, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
     Error_Handler();
-  uart_transmit_test_end();
-
-  uart_receive_test_begin();
+  
   if (HAL_UART_Receive(&huart2, (uint8_t *) message, message_size, HAL_MAX_DELAY) != HAL_OK)
     Error_Handler();
-  uart_receive_test_end();
-
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
