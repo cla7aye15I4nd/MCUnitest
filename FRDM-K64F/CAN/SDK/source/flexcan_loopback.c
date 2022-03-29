@@ -24,7 +24,7 @@
 #define EXAMPLE_FLEXCAN_IRQHandler CAN0_ORed_Message_buffer_IRQHandler
 #define RX_MESSAGE_BUFFER_NUM      (9)
 #define TX_MESSAGE_BUFFER_NUM      (8)
-#define DLC                        (8)
+#define DLC                        (2)
 
 /* Fix MISRA_C-2012 Rule 17.7. */
 #define LOG_INFO (void)PRINTF
