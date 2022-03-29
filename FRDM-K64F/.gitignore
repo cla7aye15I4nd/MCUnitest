@@ -13,3 +13,4 @@ _deps
 output.map
 *.elf
 *.zip
+build_log.txt
