@@ -1,7 +1,6 @@
 //! Testing PWM output for pre-defined pin combination: all pins for default mapping
 
 #![deny(unsafe_code)]
-#![allow(clippy::empty_loop)]
 #![no_main]
 #![no_std]
 
@@ -11,8 +10,9 @@ use cortex_m_rt::entry;
 use stm32f1xx_hal::{
     pac,
     prelude::*,
-    time::ms,
-    timer::{Channel, Tim2NoRemap},
+    pwm::Channel,
+    time::U32Ext,
+    timer::{Tim2NoRemap, Timer},
 };
 
 #[entry]
@@ -37,9 +37,20 @@ fn main() -> ! {
     // let c4 = gpioa.pa3.into_alternate_push_pull(&mut gpioa.crl);
     let pins = (c1, c2, c3);
 
-    let mut pwm = p
-        .TIM2
-        .pwm_hz::<Tim2NoRemap, _, _>(pins, &mut afio.mapr, 1.kHz(), &clocks);
+    // TIM3
+    // let c1 = gpioa.pa6.into_alternate_push_pull(&mut gpioa.crl);
+    // let c2 = gpioa.pa7.into_alternate_push_pull(&mut gpioa.crl);
+    // let c3 = gpiob.pb0.into_alternate_push_pull(&mut gpiob.crl);
+    // let c4 = gpiob.pb1.into_alternate_push_pull(&mut gpiob.crl);
+
+    // TIM4 (Only available with the "medium" density feature)
+    // let c1 = gpiob.pb6.into_alternate_push_pull(&mut gpiob.crl);
+    // let c2 = gpiob.pb7.into_alternate_push_pull(&mut gpiob.crl);
+    // let c3 = gpiob.pb8.into_alternate_push_pull(&mut gpiob.crh);
+    // let c4 = gpiob.pb9.into_alternate_push_pull(&mut gpiob.crh);
+
+    let mut pwm =
+        Timer::tim2(p.TIM2, &clocks).pwm::<Tim2NoRemap, _, _, _>(pins, &mut afio.mapr, 1.khz());
 
     // Enable clock on each of the channels
     pwm.enable(Channel::C1);
@@ -49,10 +60,10 @@ fn main() -> ! {
     //// Operations affecting all defined channels on the Timer
 
     // Adjust period to 0.5 seconds
-    pwm.set_period(ms(500).into_rate());
+    pwm.set_period(500.ms());
 
     // Return to the original frequency
-    pwm.set_period(1.kHz());
+    pwm.set_period(1.khz());
 
     let max = pwm.get_max_duty();
 
