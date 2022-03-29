@@ -29,7 +29,7 @@
 |  I2C  |                                                 |             |           |
 | USART |   [Receive/Transmit](STM32F103RB/USART/Rust)    |             |           |
 | SDIO  |                                                 |             |           |
-|  SPI  |                                                 |             |           |
+|  SPI  |    [Receive/Transmit](STM32F103RB/SPI/Rust)     |             |           |
 | Timer |                                                 |             |           |
 
 ### Reference
