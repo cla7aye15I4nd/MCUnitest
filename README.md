@@ -31,3 +31,11 @@
 | SDIO  |                                                 |             |           |
 |  SPI  |                                                 |             |           |
 | Timer |                                                 |             |           |
+
+### Reference
+
+- [Community Rust support projects for STM32 microcontrollers](https://github.com/stm32-rs)
+- [MCUXpressor SDK Builder](https://mcuxpresso.nxp.com/en/select)
+- [STM32Cube MCU Full Package for the STM32F1 series](https://github.com/STMicroelectronics/STM32CubeF1) 
+- [STM32Cube MCU Full Package for the STM32F4 series](https://github.com/STMicroelectronics/STM32CubeF4)
+
