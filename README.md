@@ -39,3 +39,6 @@
 - [STM32Cube MCU Full Package for the STM32F1 series](https://github.com/STMicroelectronics/STM32CubeF1) 
 - [STM32Cube MCU Full Package for the STM32F4 series](https://github.com/STMicroelectronics/STM32CubeF4)
 
+- [Arm Mbed OS is a platform operating system designed for the internet of things](https://github.com/ARMmbed/mbed-os)
+- [RIOT - The friendly OS for IoT](https://github.com/RIOT-OS/RIOT)
+
