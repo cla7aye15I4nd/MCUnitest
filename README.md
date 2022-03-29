@@ -1,6 +1,6 @@
 # MCUnitest
 
-## C Version
+## Official SDK Version
 
 |       |                    STM32F1/F4                    |                   SAM3A/SAM3X                   |                   FRDM-K64F                   |
 | :---: | :----------------------------------------------: | :---------------------------------------------: | :-------------------------------------------: |
@@ -16,7 +16,7 @@
 |  SPI  |     [Receive/Transmit](STM32F103RB/SPI/Cube)     |     [Receive/Transmit](SAM3X8E/SPI/Arduino)     |     [Receive/Transmit](FRDM-K64F/SPI/SDK)     |
 | Timer |                                                  |                                                 |                                               |
 
-## Rust Version
+## Other Version
 
 |       |                   STM32F1/F4                    | SAM3A/SAM3X | FRDM-K64F |
 | :---: | :---------------------------------------------: | :---------: | :-------: |
