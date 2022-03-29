@@ -4,7 +4,7 @@
 
 |       |                    STM32F1/F4                    |                   SAM3A/SAM3X                   |                   FRDM-K64F                   |
 | :---: | :----------------------------------------------: | :---------------------------------------------: | :-------------------------------------------: |
-|  ADC  |  [Calibration/Conversion](STM32F103RB/ADC/Cube)  | [Analog-to-Digital Input](SAM3X8E/ADC/Arduino)  |                                               |
+|  ADC  |  [Calibration/Conversion](STM32F103RB/ADC/Cube)  | [Analog-to-Digital Input](SAM3X8E/ADC/Arduino)  |  [Calibration/Conversion](FRDM-K64F/ADC/SDK)  |
 |  CAN  |     [Receive/Transmit](STM32F429ZI/CAN/Cube)     |                                                 |                                               |
 |  DAC  | [Digital-to-Analog Output](STM32F429ZI/DAC/Cube) | [Digital-to-Analog Output](SAM3X8E/DAC/Arduino) | [Digital-to-Analog Output](FRDM-K64F/DAC/SDK) |
 |  ETH  |                                                  |                                                 |                                               |
