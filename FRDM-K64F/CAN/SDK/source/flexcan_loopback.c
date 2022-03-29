@@ -160,8 +160,8 @@ int main(void)
 #endif
 
     /* Enable Rx Message Buffer interrupt. */
-    FLEXCAN_EnableMbInterrupts(EXAMPLE_CAN, flag << RX_MESSAGE_BUFFER_NUM);
-    (void)EnableIRQ(EXAMPLE_FLEXCAN_IRQn);
+    // FLEXCAN_EnableMbInterrupts(EXAMPLE_CAN, flag << RX_MESSAGE_BUFFER_NUM);
+    // (void)EnableIRQ(EXAMPLE_FLEXCAN_IRQn);
 
     /* Prepare Tx Frame for sending. */
     txFrame.format = (uint8_t)kFLEXCAN_FrameFormatStandard;
@@ -205,6 +205,16 @@ int main(void)
     /* Waiting for Message receive finish. */
     while (!rxComplete)
     {
+        if (0U != FLEXCAN_GetMbStatusFlags(EXAMPLE_CAN, flag << RX_MESSAGE_BUFFER_NUM))
+        {
+            FLEXCAN_ClearMbStatusFlags(EXAMPLE_CAN, flag << RX_MESSAGE_BUFFER_NUM);
+    #if (defined(USE_CANFD) && USE_CANFD)
+            (void)FLEXCAN_ReadFDRxMb(EXAMPLE_CAN, RX_MESSAGE_BUFFER_NUM, &rxFrame);
+    #else
+            (void)FLEXCAN_ReadRxMb(EXAMPLE_CAN, RX_MESSAGE_BUFFER_NUM, &rxFrame);
+    #endif
+            rxComplete = true;
+        }
     }
 
     LOG_INFO("\r\nReceived message from MB%d\r\n", RX_MESSAGE_BUFFER_NUM);
@@ -219,7 +229,7 @@ int main(void)
 #endif
 
     /* Stop FlexCAN Send & Receive. */
-    FLEXCAN_DisableMbInterrupts(EXAMPLE_CAN, flag << RX_MESSAGE_BUFFER_NUM);
+    // FLEXCAN_DisableMbInterrupts(EXAMPLE_CAN, flag << RX_MESSAGE_BUFFER_NUM);
 
     LOG_INFO("\r\n==FlexCAN loopback functional example -- Finish.==\r\n");
 
