@@ -11,7 +11,7 @@
 | GPIO  |                                                  |                                                 |                                             |
 |  PWM  |      [Configuration](STM32F103RB/PWM/Cube)       |          [Dimmer](SAM3X8E/PWM/Arduino)          |                                             |
 |  I2C  |     [Receive/Transmit](STM32F103RB/I2C/Cube)     |     [Receive/Transmit](SAM3X8E/I2C/Arduino)     |                                             |
-| USART |    [Receive/Transmit](STM32F103RB/USART/Cube)    |    [Receive/Transmit](SAM3X8E/UART/Arduino)     | [Receive/Transmit](FRDM-K64F/UART/Standard) |
+| USART |    [Receive/Transmit](STM32F103RB/USART/Cube)    |    [Receive/Transmit](SAM3X8E/UART/Arduino)     | [Receive/Transmit](FRDM-K64F/UART/SDK) |
 | SDIO  |                                                  |                                                 |                                             |
 |  SPI  |     [Receive/Transmit](STM32F103RB/SPI/Cube)     |     [Receive/Transmit](SAM3X8E/SPI/Arduino)     |                                             |
 | Timer |                                                  |                                                 |                                             |
