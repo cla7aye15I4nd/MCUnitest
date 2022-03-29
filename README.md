@@ -25,7 +25,7 @@
 |  DAC  |                                                 |             |           |
 |  ETH  |                                                 |             |           |
 | GPIO  |                                                 |             |           |
-|  PWM  |                                                 |             |           |
+|  PWM  |      [Configuration](STM32F103RB/PWM/Rust)      |             |           |
 |  I2C  |                                                 |             |           |
 | USART |   [Receive/Transmit](STM32F103RB/USART/Rust)    |             |           |
 | SDIO  |                                                 |             |           |
