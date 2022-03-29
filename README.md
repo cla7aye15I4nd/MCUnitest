@@ -18,16 +18,16 @@
 
 ## Rust Version
 
-|       |                 STM32F1/F4                 | SAM3A/SAM3X | FRDM-K64F |
-| :---: | :----------------------------------------: | :---------: | :-------: |
-|  ADC  |                                            |             |           |
-|  CAN  |                                            |             |           |
-|  DAC  |                                            |             |           |
-|  ETH  |                                            |             |           |
-| GPIO  |                                            |             |           |
-|  PWM  |                                            |             |           |
-|  I2C  |                                            |             |           |
-| USART | [Receive/Transmit](STM32F103RB/USART/Rust) |             |           |
-| SDIO  |                                            |             |           |
-|  SPI  |                                            |             |           |
-| Timer |                                            |             |           |
+|       |                   STM32F1/F4                    | SAM3A/SAM3X | FRDM-K64F |
+| :---: | :---------------------------------------------: | :---------: | :-------: |
+|  ADC  | [Analog-to-Digital Input](STM32F103RB/ADC/Rust) |             |           |
+|  CAN  |                                                 |             |           |
+|  DAC  |                                                 |             |           |
+|  ETH  |                                                 |             |           |
+| GPIO  |                                                 |             |           |
+|  PWM  |                                                 |             |           |
+|  I2C  |                                                 |             |           |
+| USART |   [Receive/Transmit](STM32F103RB/USART/Rust)    |             |           |
+| SDIO  |                                                 |             |           |
+|  SPI  |                                                 |             |           |
+| Timer |                                                 |             |           |
