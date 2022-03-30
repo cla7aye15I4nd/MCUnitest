@@ -15,4 +15,7 @@ DEVELHELP ?= 0
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 0
 
+USEMODULE += periph_uart
+USEMODULE += stdio_uart_rx
+
 include $(RIOTBASE)/Makefile.include
