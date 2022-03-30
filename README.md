@@ -30,7 +30,7 @@
 | USART |          [Receive/Transmit](STM32F103RB/USART/Rust)          |    [Receive/Transmit](SAM3X8E/SPI/RIOT)     |     [Receive/Transmit](SAM3X8E/SPI/RIOT)      |
 | SDIO  |                                                              |                                             |                                               |
 |  SPI  |           [Receive/Transmit](STM32F103RB/SPI/Rust)           |    [Receive/Transmit](SAM3X8E/SPI/RIOT)     |    [Receive/Transmit](FRDM-K64F/SPI/RIOT)     |
-| Timer |                                                              |                                             |                                               |
+| Timer |               [Counter](STM32F103RB/TIM/RIOT)                |         [Counter](SAM3X8E/TIM/RIOT)         |         [Counter](FRDM-K64F/TIM/RIOT)         |
 
 ### Reference
 
