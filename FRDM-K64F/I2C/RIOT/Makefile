@@ -1,4 +1,4 @@
-APPLICATION = adc
+APPLICATION = i2c
 
 BOARD ?= frdm-k64f
 
