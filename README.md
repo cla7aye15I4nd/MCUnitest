@@ -26,7 +26,7 @@
 |  ETH  |                                                 |             |           |
 | GPIO  |                                                 |             |           |
 |  PWM  |      [Configuration](STM32F103RB/PWM/Rust)      |             |           |
-|  I2C  |                                                 |             |           |
+|  I2C  |    [Receive/Transmit](STM32F103RB/I2C/Rust)     |             |           |
 | USART |   [Receive/Transmit](STM32F103RB/USART/Rust)    |             |           |
 | SDIO  |                                                 |             |           |
 |  SPI  |    [Receive/Transmit](STM32F103RB/SPI/Rust)     |             |           |
