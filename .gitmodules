@@ -7,3 +7,6 @@
 [submodule "library/STM32CubeF4"]
 	path = library/STM32CubeF4
 	url = https://github.com/STMicroelectronics/STM32CubeF4.git
+[submodule "library/RIOT"]
+	path = library/RIOT
+	url = https://github.com/RIOT-OS/RIOT.git
