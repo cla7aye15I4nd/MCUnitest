@@ -24,7 +24,10 @@ use stm32f1xx_hal::{
         Spi, 
         // Spi1NoRemap
     },
+    serial::{Config, Serial},
 };
+
+use core::fmt::Write;
 
 #[entry]
 fn main() -> ! {
@@ -52,9 +55,33 @@ fn main() -> ! {
         1_u32.mhz(),
         clocks,
     );
+
+    // USART2
+    let tx = gpioa.pa2.into_alternate_push_pull(&mut gpioa.crl);
+    let rx = gpioa.pa3;
+
+    // Set up the usart device. Taks ownership over the USART register and tx/rx pins. The rest of
+    // the registers are used to enable and configure the device.
+    let serial = Serial::usart2(
+        dp.USART2,
+        (tx, rx),
+        &mut afio.mapr,
+        Config::default().baudrate(115200.bps()),
+        clocks,
+    );
+
+    let (mut tx, _rx) = serial.split();
     
     let mut data = [0];
+    match spi.transfer(&mut data) {
+        Err(_) => {
+            writeln!(tx, "Error").unwrap();
+        },
+        Ok(_) => {
+            writeln!(tx, "Success").unwrap();
+        },
+    }
+    
     loop {
-        spi.transfer(&mut data).unwrap();
     }
 }
