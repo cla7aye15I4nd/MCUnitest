@@ -18,4 +18,6 @@ QUIET ?= 0
 USEMODULE += periph_uart
 USEMODULE += stdio_uart_rx
 
+DISABLE_MODULE += cortexm_fpu
+
 include $(RIOTBASE)/Makefile.include
