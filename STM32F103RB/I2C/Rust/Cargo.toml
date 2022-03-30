@@ -1,6 +1,6 @@
 [package]
 edition = "2018"
-name = "uart"
+name = "i2c"
 version = "0.1.0"
 
 [profile.release]

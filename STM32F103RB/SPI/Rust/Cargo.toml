@@ -1,6 +1,6 @@
 [package]
 edition = "2018"
-name = "uart"
+name = "spi"
 version = "0.1.0"
 
 [profile.release]
