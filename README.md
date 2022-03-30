@@ -25,7 +25,7 @@
 |  DAC  |                                                              |    [Receive/Transmit](SAM3X8E/CAN/RIOT)     |                                      |
 |  ETH  |                                                              |                                             |                                      |
 | GPIO  |        [Read/Write/Interrupt](STM32F429ZI/GPIO/Rust)         |    [Receive/Transmit](SAM3X8E/GPIO/RIOT)    |                                      |
-|  PWM  |            [Configuration](STM32F103RB/PWM/Rust)             |                                             |                                      |
+|  PWM  |            [Configuration](STM32F103RB/PWM/Rust)             |      [Configuration](SAM3X8E/PWM/RIOT)      |                                      |
 |  I2C  |           [Receive/Transmit](STM32F103RB/I2C/Rust)           |                                             |                                      |
 | USART |          [Receive/Transmit](STM32F103RB/USART/Rust)          |    [Receive/Transmit](SAM3X8E/SPI/RIOT)     | [Receive/Transmit](SAM3X8E/SPI/RIOT) |
 | SDIO  |                                                              |                                             |                                      |
