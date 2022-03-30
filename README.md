@@ -18,19 +18,19 @@
 
 ## Other Version
 
-|       |                          STM32F1/F4                          |                 SAM3A/SAM3X                 |              FRDM-K64F               |
-| :---: | :----------------------------------------------------------: | :-----------------------------------------: | :----------------------------------: |
-|  ADC  |       [Analog-to-Digital Input](STM32F103RB/ADC/Rust)        | [Analog-to-Digital Input](SAM3X8E/ADC/RIOT) |                                      |
-|  CAN  | [Receive/Transmit](https://github.com/stm32-rs/stm32f4xx-hal/blob/v0.9.0/examples/can-send.rs) |                                             |                                      |
-|  DAC  |                                                              |    [Receive/Transmit](SAM3X8E/CAN/RIOT)     |                                      |
-|  ETH  |                                                              |                                             |                                      |
-| GPIO  |        [Read/Write/Interrupt](STM32F429ZI/GPIO/Rust)         |    [Receive/Transmit](SAM3X8E/GPIO/RIOT)    |                                      |
-|  PWM  |            [Configuration](STM32F103RB/PWM/Rust)             |      [Configuration](SAM3X8E/PWM/RIOT)      |                                      |
-|  I2C  |           [Receive/Transmit](STM32F103RB/I2C/Rust)           |                                             |                                      |
-| USART |          [Receive/Transmit](STM32F103RB/USART/Rust)          |    [Receive/Transmit](SAM3X8E/SPI/RIOT)     | [Receive/Transmit](SAM3X8E/SPI/RIOT) |
-| SDIO  |                                                              |                                             |                                      |
-|  SPI  |           [Receive/Transmit](STM32F103RB/SPI/Rust)           |    [Receive/Transmit](SAM3X8E/SPI/RIOT)     |                                      |
-| Timer |                                                              |                                             |                                      |
+|       |                          STM32F1/F4                          |                 SAM3A/SAM3X                 |                   FRDM-K64F                   |
+| :---: | :----------------------------------------------------------: | :-----------------------------------------: | :-------------------------------------------: |
+|  ADC  |       [Analog-to-Digital Input](STM32F103RB/ADC/Rust)        | [Analog-to-Digital Input](SAM3X8E/ADC/RIOT) | [Analog-to-Digital Input](FRDM-K64F/ADC/RIOT) |
+|  CAN  | [Receive/Transmit](https://github.com/stm32-rs/stm32f4xx-hal/blob/v0.9.0/examples/can-send.rs) |                                             |                                               |
+|  DAC  |                                                              |    [Receive/Transmit](SAM3X8E/CAN/RIOT)     |                                               |
+|  ETH  |                                                              |                                             |                                               |
+| GPIO  |        [Read/Write/Interrupt](STM32F429ZI/GPIO/Rust)         |    [Receive/Transmit](SAM3X8E/GPIO/RIOT)    |                                               |
+|  PWM  |            [Configuration](STM32F103RB/PWM/Rust)             |      [Configuration](SAM3X8E/PWM/RIOT)      |                                               |
+|  I2C  |           [Receive/Transmit](STM32F103RB/I2C/Rust)           |                                             |                                               |
+| USART |          [Receive/Transmit](STM32F103RB/USART/Rust)          |    [Receive/Transmit](SAM3X8E/SPI/RIOT)     |     [Receive/Transmit](SAM3X8E/SPI/RIOT)      |
+| SDIO  |                                                              |                                             |                                               |
+|  SPI  |           [Receive/Transmit](STM32F103RB/SPI/Rust)           |    [Receive/Transmit](SAM3X8E/SPI/RIOT)     |                                               |
+| Timer |                                                              |                                             |                                               |
 
 ### Reference
 
