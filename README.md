@@ -22,7 +22,7 @@
 | :---: | :----------------------------------------------------------: | :-----------------------------------------: | :----------------------------------: |
 |  ADC  |       [Analog-to-Digital Input](STM32F103RB/ADC/Rust)        | [Analog-to-Digital Input](SAM3X8E/ADC/RIOT) |                                      |
 |  CAN  | [Receive/Transmit](https://github.com/stm32-rs/stm32f4xx-hal/blob/v0.9.0/examples/can-send.rs) |                                             |                                      |
-|  DAC  |                                                              |                                             |                                      |
+|  DAC  |                                                              |    [Receive/Transmit](SAM3X8E/CAN/RIOT)     |                                      |
 |  ETH  |                                                              |                                             |                                      |
 | GPIO  |        [Read/Write/Interrupt](STM32F429ZI/GPIO/Rust)         |                                             |                                      |
 |  PWM  |            [Configuration](STM32F103RB/PWM/Rust)             |                                             |                                      |
