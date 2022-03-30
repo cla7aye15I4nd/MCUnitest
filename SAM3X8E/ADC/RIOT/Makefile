@@ -1,4 +1,4 @@
-APPLICATION = uart
+APPLICATION = adc
 
 BOARD ?= arduino-due
 
