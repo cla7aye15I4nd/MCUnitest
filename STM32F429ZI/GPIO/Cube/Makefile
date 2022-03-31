@@ -40,21 +40,21 @@ Core/Src/main.c \
 Core/Src/gpio.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
-/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Core/Src/system_stm32f4xx.c
 
 # ASM sources
@@ -113,10 +113,10 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -ICore/Inc \
--I/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Inc \
--I/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy \
--I/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/CMSIS/Device/ST/STM32F4xx/Include \
--I/media/moe/keystone/nirvana/MCUnitest/library/STM32CubeF4/Drivers/CMSIS/Include
+-I../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Inc \
+-I../../../library/STM32CubeF4/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy \
+-I../../../library/STM32CubeF4/Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+-I../../../library/STM32CubeF4/Drivers/CMSIS/Include
 
 
 # compile gcc flags
