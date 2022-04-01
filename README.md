@@ -10,7 +10,7 @@
 |  ETH  |     [Receive/Transmit](STM32F429ZI/ETH/Cube)     |     [Receive/Transmit](SAM3X8E/ETH/Arduino)     |     [Receive/Transmit](FRDM-K64F/ETH/SDK)     |
 | GPIO  |  [Read/Write/Interrupt](STM32F429ZI/GPIO/Cube)   |  [Read/Write/Interrupt](SAM3X8E/GPIO/Arduino)   |  [Read/Write/Interrupt](FRDM-K64F/GPIO/SDK)   |
 |  PWM  |      [Configuration](STM32F103RB/PWM/Cube)       |          [Dimmer](SAM3X8E/PWM/Arduino)          |      [Configuration](FRDM-K64F/PWM/SDK)       |
-|  I2C  |     [Receive/Transmit](STM32F103RB/I2C/Cube)     |     [Receive/Transmit](SAM3X8E/I2C/Arduino)     |     [Receive/Transmit](FRDM-K64F/I2C/SDK)     |
+|  I2C  |     [Receive/Transmit](STM32F103RB/I2C/Cube)     |                       N/A                       |     [Receive/Transmit](FRDM-K64F/I2C/SDK)     |
 | USART |    [Receive/Transmit](STM32F103RB/USART/Cube)    |    [Receive/Transmit](SAM3X8E/UART/Arduino)     |    [Receive/Transmit](FRDM-K64F/UART/SDK)     |
 | SDIO  |          [Fatfs](STM32F429ZI/SDIO/Cube)          |                       N/A                       |       [Read/Write](FRDM-K64F/SDIO/SDK)        |
 |  SPI  |     [Receive/Transmit](STM32F103RB/SPI/Cube)     |     [Receive/Transmit](SAM3X8E/SPI/Arduino)     |     [Receive/Transmit](FRDM-K64F/SPI/SDK)     |
@@ -26,7 +26,7 @@
 |  ETH  |                                                 |                                              |                                               |
 | GPIO  |  [Read/Write/Interrupt](STM32F429ZI/GPIO/Rust)  |    [Receive/Transmit](SAM3X8E/GPIO/RIOT)     |  [Read/Write/Interrupt](FRDM-K64F/GPIO/RIOT)  |
 |  PWM  |      [Configuration](STM32F103RB/PWM/Rust)      |      [Configuration](SAM3X8E/PWM/RIOT)       |      [Configuration](FRDM-K64F/PWM/RIOT)      |
-|  I2C  |    [Receive/Transmit](STM32F103RB/I2C/Rust)     |                                              |    [Receive/Transmit](FRDM-K64F/I2C/RIOT)     |
+|  I2C  |    [Receive/Transmit](STM32F103RB/I2C/Rust)     |                     N/A                      |    [Receive/Transmit](FRDM-K64F/I2C/RIOT)     |
 | USART |   [Receive/Transmit](STM32F103RB/USART/Rust)    |     [Receive/Transmit](SAM3X8E/SPI/RIOT)     |     [Receive/Transmit](SAM3X8E/SPI/RIOT)      |
 | SDIO  |                                                 |                     N/A                      |                                               |
 |  SPI  |    [Receive/Transmit](STM32F103RB/SPI/Rust)     |     [Receive/Transmit](SAM3X8E/SPI/RIOT)     |    [Receive/Transmit](FRDM-K64F/SPI/RIOT)     |
