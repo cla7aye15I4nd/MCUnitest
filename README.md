@@ -12,7 +12,7 @@
 |  PWM  |      [Configuration](STM32F103RB/PWM/Cube)       |          [Dimmer](SAM3X8E/PWM/Arduino)          |      [Configuration](FRDM-K64F/PWM/SDK)       |
 |  I2C  |     [Receive/Transmit](STM32F103RB/I2C/Cube)     |     [Receive/Transmit](SAM3X8E/I2C/Arduino)     |     [Receive/Transmit](FRDM-K64F/I2C/SDK)     |
 | USART |    [Receive/Transmit](STM32F103RB/USART/Cube)    |    [Receive/Transmit](SAM3X8E/UART/Arduino)     |    [Receive/Transmit](FRDM-K64F/UART/SDK)     |
-| SDIO  |          [Fatfs](STM32F429ZI/SDIO/Cube)          |                                                 |       [Read/Write](FRDM-K64F/SDIO/SDK)        |
+| SDIO  |          [Fatfs](STM32F429ZI/SDIO/Cube)          |                       N/A                       |       [Read/Write](FRDM-K64F/SDIO/SDK)        |
 |  SPI  |     [Receive/Transmit](STM32F103RB/SPI/Cube)     |     [Receive/Transmit](SAM3X8E/SPI/Arduino)     |     [Receive/Transmit](FRDM-K64F/SPI/SDK)     |
 | Timer |          [Timer](STM32F103RB/TIM/Cube)           |          [Timer](SAM3X8E/TIM/Arduino)           |          [Timer](FRDM-K64F/TIM/SDK)           |
 
@@ -28,7 +28,7 @@
 |  PWM  |      [Configuration](STM32F103RB/PWM/Rust)      |      [Configuration](SAM3X8E/PWM/RIOT)       |      [Configuration](FRDM-K64F/PWM/RIOT)      |
 |  I2C  |    [Receive/Transmit](STM32F103RB/I2C/Rust)     |                                              |    [Receive/Transmit](FRDM-K64F/I2C/RIOT)     |
 | USART |   [Receive/Transmit](STM32F103RB/USART/Rust)    |     [Receive/Transmit](SAM3X8E/SPI/RIOT)     |     [Receive/Transmit](SAM3X8E/SPI/RIOT)      |
-| SDIO  |                                                 |                                              |                                               |
+| SDIO  |                                                 |                     N/A                      |                                               |
 |  SPI  |    [Receive/Transmit](STM32F103RB/SPI/Rust)     |     [Receive/Transmit](SAM3X8E/SPI/RIOT)     |    [Receive/Transmit](FRDM-K64F/SPI/RIOT)     |
 | Timer |         [Counter](STM32F103RB/TIM/RIOT)         |         [Counter](SAM3X8E/TIM/RIOT)          |         [Counter](FRDM-K64F/TIM/RIOT)         |
 
