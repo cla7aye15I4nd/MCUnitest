@@ -14,7 +14,7 @@
 | USART |    [Receive/Transmit](STM32F103RB/USART/Cube)    |    [Receive/Transmit](SAM3X8E/UART/Arduino)     |    [Receive/Transmit](FRDM-K64F/UART/SDK)     |
 | SDIO  |          [Fatfs](STM32F429ZI/SDIO/Cube)          |                                                 |       [Read/Write](FRDM-K64F/SDIO/SDK)        |
 |  SPI  |     [Receive/Transmit](STM32F103RB/SPI/Cube)     |     [Receive/Transmit](SAM3X8E/SPI/Arduino)     |     [Receive/Transmit](FRDM-K64F/SPI/SDK)     |
-| Timer |        [Interrupt](STM32F103RB/TIM/Cube)         |        [Interrupt](SAM3X8E/TIM/Arduino)         |                                               |
+| Timer |          [Timer](STM32F103RB/TIM/Cube)           |          [Timer](SAM3X8E/TIM/Arduino)           |          [Timer](FRDM-K64F/TIM/SDK)           |
 
 ## Other Version
 
