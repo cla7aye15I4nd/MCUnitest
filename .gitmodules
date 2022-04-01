@@ -10,3 +10,6 @@
 [submodule "library/RIOT"]
 	path = library/RIOT
 	url = https://github.com/RIOT-OS/RIOT.git
+[submodule "library/mbed-os"]
+	path = library/mbed-os
+	url = https://github.com/ARMmbed/mbed-os.git
