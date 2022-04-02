@@ -53,7 +53,7 @@ def collect(origin_path, board, peripheral, version):
 
     for build in build_path:
         if build in filenames:
-            name = f'{board}-{peripheral}-{version}.elf'
+            name = f'{board}_{peripheral}_{version}.elf'
             where = 'official' if version in official_sdk else 'other'
             dst_path = os.path.join(origin_path, 'target', where, name)
 
