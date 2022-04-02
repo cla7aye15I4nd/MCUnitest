@@ -1,14 +1,23 @@
 import os
 import sys
+import shutil
 
 build_path = ['bin', 'build', 'target', 'debug', 'release']
 target_board = ['FRDM-K64F', 'SAM3X8E', 'STM32F103RB', 'STM32F429ZI']
-
+official_sdk = ['SDK', 'Arduino', 'Cube']
 
 def make(path):
     target_path = os.path.join(path, 'target')
-    if not os.path.exists(target_path):
-        os.mkdir(target_path)
+
+    other_path = os.path.join(target_path, 'other')
+    official_path = os.path.join(target_path, 'official')
+    
+    if os.path.exists(target_path):
+        shutil.rmtree(target_path)
+    
+    os.mkdir(target_path)
+    os.mkdir(official_path)
+    os.mkdir(other_path)
 
     path = os.path.abspath(path)
 
@@ -31,22 +40,31 @@ def collect(origin_path, board, peripheral, version):
     os.chdir(path)
 
     filenames = os.listdir(path)
-    if 'Makefile' in filenames:
-        os.system(f'make')
+
+    if 'build.sh' in filenames:
+        os.system(f'bash build.sh  1> /dev/null 2> /dev/null')
     
-    elif 'build.sh' in filenames:
-        os.system(f'bash build.sh')
+    elif 'Makefile' in filenames:
+        os.system(f'make 1> /dev/null 2> /dev/null')
     
     else:
+        print(f'[WARN] {path}')
         return os.chdir(cwd)
 
     for build in build_path:
         if build in filenames:
-            target = os.path.join(path, build)
             name = f'{board}-{peripheral}-{version}.elf'
-            copy_path = os.path.join(origin_path, 'target', name)
+            where = 'official' if version in official_sdk else 'other'
+            dst_path = os.path.join(origin_path, 'target', where, name)
+
+            src_path = os.path.join(path, build)
+            if version == 'RIOT':
+                for sub in os.listdir(src_path):
+                    src_path = os.path.join(src_path, sub)
+                    break
             
-            os.system(f'cp {target}/*.elf {copy_path}')
+            command = f'cp {src_path}/*.elf {dst_path}'
+            os.system(command)
             break
     
     os.chdir(cwd)
