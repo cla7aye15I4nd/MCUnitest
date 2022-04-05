@@ -73,7 +73,7 @@ class SAM3X8ETest(unittest.TestCase):
         def hook_rst():
             print("LED off")
             flags[1] = True
-            
+
         ql.hw.piob.hook_set  (27, hook_set)
         ql.hw.piob.hook_reset(27, hook_rst)
 
@@ -93,6 +93,63 @@ class SAM3X8ETest(unittest.TestCase):
         self.assertTrue(ql.hw.uart.recv() == b'main(): This is RIOT! (Version: 2022.04-devel-1050-gfca56)\nok\n')
         
         del ql
+
+    def test_gpio_arduino(self):
+        ql = self.qiling_common_setup('../target/official/SAM3X8E_GPIO_Arduino.elf')        
+        # ql.hw.piob.watch()
+
+        status = 0
+        def hook_set():
+            nonlocal status
+            status = 1
+        
+        def hook_rst():            
+            nonlocal status
+            status = 0
+
+        ql.hw.piob.hook_set  (27, hook_set)
+        ql.hw.piob.hook_reset(27, hook_rst)
+
+        ql.run(count=200000)
+        ql.hw.piob.set_pin(25)
+        ql.run(count=2000)
+        self.assertTrue(status == 1)
+
+        ql.hw.piob.reset_pin(25)
+        ql.run(count=2000)
+        self.assertTrue(status == 0)
+        
+        del ql
+
+    def test_gpio_riot(self):
+        ql = self.qiling_common_setup('../target/other/SAM3X8E_GPIO_RIOT.elf')                
+
+        status = 0
+        def hook_set():
+            nonlocal status
+            status = 1
+        
+        def hook_rst():            
+            nonlocal status
+            status = 0
+
+        ql.hw.piob.hook_set  (27, hook_set)
+        ql.hw.piob.hook_reset(27, hook_rst)
+
+        
+        ql.run(count=200000)
+
+        ql.hw.piob.set_pin(25)
+        ql.run(count=2000)
+        self.assertTrue(status == 1)
+
+        ql.hw.piob.reset_pin(25)
+        ql.run(count=2000)
+        self.assertTrue(status == 0)
+        
+        del ql
+
+    
 
 if __name__ == '__main__':
     unittest.main()
