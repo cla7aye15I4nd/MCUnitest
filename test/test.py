@@ -167,5 +167,24 @@ class SAM3X8ETest(unittest.TestCase):
         
         del ql
 
+    # TODO: spi transfer / receive
+    def test_spi_arduino(self):
+        ql = self.qiling_common_setup('../target/official/SAM3X8E_SPI_Arduino.elf')                
+        ql.hw.create('spi0').watch()
+
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=100000)
+
+        del ql
+
+    def test_spi_riot(self):
+        ql = self.qiling_common_setup('../target/other/SAM3X8E_SPI_RIOT.elf')                
+        ql.hw.create('spi0').watch()
+
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=1000000)
+        
+        del ql
+
 if __name__ == '__main__':
     unittest.main()
