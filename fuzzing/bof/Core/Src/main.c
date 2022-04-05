@@ -57,6 +57,18 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void hack(void) {
+  HAL_UART_Transmit(&huart2, (uint8_t*) "Nice Hack!\n", 11, HAL_MAX_DELAY);
+}
+
+void vuln(void) {
+  char buf[0x10];
+
+  scanf("%s", buf);
+  puts(buf);
+}
+
+volatile void* hack_ptr = hack;
 /* USER CODE END 0 */
 
 /**
@@ -88,8 +100,12 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART3_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   RetargetInit(&huart3);
+  
+  if (hack_ptr)
+    vuln();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -97,17 +113,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    vuln();
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
-}
-
-void vuln(void) {
-  char buf[0x10];
-
-  scanf("%s", buf);
-  puts(buf);
 }
 
 /**
