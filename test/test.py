@@ -167,6 +167,26 @@ class SAM3X8ETest(unittest.TestCase):
         
         del ql
 
+    def test_tim_arduino(self):
+        ql = self.qiling_common_setup('../target/official/SAM3X8E_TIM_Arduino.elf')                
+        
+        
+        ql.hw.piob.hook_set  (27, lambda : print('LED on'))
+        ql.hw.piob.hook_reset(27, lambda : print('LED off'))
+
+        ql.hw.systick.ratio = 0xfff        
+        ql.run(count=30000)
+        
+        del ql
+
+    def test_tim_riot(self):
+        # FIXME: some bugs here
+        ql = self.qiling_common_setup('../target/other/SAM3X8E_TIM_RIOT.elf')                
+        ql.hw.create('tc0').watch()
+        
+        ql.run(count=200000)        
+        del ql
+    
     # TODO: spi transfer / receive
     def test_spi_arduino(self):
         ql = self.qiling_common_setup('../target/official/SAM3X8E_SPI_Arduino.elf')                
