@@ -149,7 +149,23 @@ class SAM3X8ETest(unittest.TestCase):
         
         del ql
 
-    
+    def test_pwm_arduino(self):
+        ql = self.qiling_common_setup('../target/official/SAM3X8E_PWM_Arduino.elf')                
+        ql.hw.create('tc0').watch()
+
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=20000)
+        
+        del ql
+
+    def test_pwm_riot(self):
+        ql = self.qiling_common_setup('../target/other/SAM3X8E_PWM_RIOT.elf')                
+        ql.hw.create('pwm').watch()
+
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=20000)
+        
+        del ql
 
 if __name__ == '__main__':
     unittest.main()
