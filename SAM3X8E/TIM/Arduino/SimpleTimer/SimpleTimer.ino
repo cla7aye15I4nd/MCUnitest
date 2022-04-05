@@ -1,21 +1,26 @@
-#include "DueTimer.h"
+/*
+ * timer_blink
+ *
+ * Blinks the built-in LED every second using the arduino-timer library.
+ *
+ */
 
-int myLed = 13;
+#include "arduino-timer.h"
 
-bool ledOn = false;
-void myHandler(){
-	ledOn = !ledOn;
+auto timer = timer_create_default(); // create a timer with default settings
 
-	digitalWrite(LED_BUILTIN, ledOn);
+bool toggle_led(void *) {
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); // toggle the LED
+  return true; // repeat? true
 }
 
-void setup(){
-	pinMode(myLed, OUTPUT);
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT); // set LED pin to OUTPUT
 
-	Timer3.attachInterrupt(myHandler);
-	Timer3.start(50000);
+  // call the toggle_led function every 1000 millis (1 second)
+  timer.every(1000, toggle_led);
 }
 
-void loop(){
-	while(1) {}
+void loop() {
+  timer.tick(); // tick the timer
 }
