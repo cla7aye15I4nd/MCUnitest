@@ -3,19 +3,13 @@
 # Cross Platform and Multi Architecture Advanced Binary Emulation Framework
 #
 
-import sys, os, lief
+import sys, os
 sys.path.append("../../../../qiling")
 
 from qiling.core import Qiling
 from qiling.extensions.mcu.stm32f4 import stm32f429
 
-path = "../build/bof.elf"
-
-elf = lief.parse(path)
-
-vuln = next(filter(lambda o: o.name == 'vuln', elf.exported_functions))
-
-ql = Qiling([path], archtype="cortex_m", env=stm32f429, ostype='mcu')
+ql = Qiling(["../build/bof.elf"], archtype="cortex_m", env=stm32f429, ostype='mcu')
 
 ql.hw.create('pwr')
 ql.hw.create('rcc')
