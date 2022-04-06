@@ -57,8 +57,9 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void hack(void) {
+void hack(void) {  
   HAL_UART_Transmit(&huart2, (uint8_t*) "Nice Hack!\n", 11, HAL_MAX_DELAY);
+  while(1);
 }
 
 void vuln(void) {
