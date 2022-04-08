@@ -69,9 +69,9 @@ int main(void)
     adc16ChannelConfigStruct.enableDifferentialConversion = false;
 
     ADC16_SetChannelConfig(DEMO_ADC16_BASE, DEMO_ADC16_CHANNEL_GROUP, &adc16ChannelConfigStruct);
-    if (0U == (kADC16_ChannelConversionDoneFlag &
+    while (0U == (kADC16_ChannelConversionDoneFlag &
                     ADC16_GetChannelStatusFlags(DEMO_ADC16_BASE, DEMO_ADC16_CHANNEL_GROUP)))
-        Error_Handler();
+        ;
         
     PRINTF("ADC Value: %d\r\n", ADC16_GetChannelConversionValue(DEMO_ADC16_BASE, DEMO_ADC16_CHANNEL_GROUP));
 
