@@ -268,6 +268,45 @@ class FRDMK64FTest(unittest.TestCase):
         ql.run(count=10000)
         self.assertTrue(ql.hw.uart0.recv().startswith(b'main(): This is RIOT! (Version: 2022.04-devel-1050-gfca56)\nadc = '))        
         
+    def test_gpio_sdk(self):
+        ql = self.qiling_common_setup('../target/official/FRDM-K64F_GPIO_SDK.elf')
+        
+        ql.hw.create('uart0')
+
+        ql.run(count=10000)
+        
+        status = ql.hw.gpiob.pin(22)
+        for i in range(10):
+            ql.hw.gpioa.set_pin(4)
+            ql.hw.gpioa.reset_pin(4)
+            ql.run(count=1000)
+            
+            now = ql.hw.gpiob.pin(22)
+            self.assertTrue(now != status)
+            status = now            
+
+        del ql
+
+    def test_gpio_riot(self):
+        ql = self.qiling_common_setup('../target/other/FRDM-K64F_GPIO_RIOT.elf')
+        
+        ql.hw.create('smc')
+        ql.hw.create('rtc')
+        ql.hw.create('uart0')
+        
+        ql.run(count=10000)
+        self.assertFalse(ql.hw.gpiob.pin(22))
+        
+        for i in range(10):
+            ql.hw.gpioc.set_pin(6)
+            ql.run(count=100)
+            self.assertTrue(ql.hw.gpiob.pin(22))
+            
+            ql.hw.gpioc.reset_pin(6)
+            ql.run(count=100)
+            self.assertFalse(ql.hw.gpiob.pin(22))
+
+        del ql    
 
 if __name__ == '__main__':
     unittest.main()
