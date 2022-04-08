@@ -4,6 +4,7 @@ sys.path.append('../../qiling')
 from qiling.core import Qiling
 from qiling.const import QL_VERBOSE
 from qiling.extensions.mcu.atmel import sam3x8e
+from qiling.extensions.mcu.nxp import mk64f12
 
 
 class SAM3X8ETest(unittest.TestCase):
@@ -203,6 +204,38 @@ class SAM3X8ETest(unittest.TestCase):
 
         ql.hw.systick.ratio = 0xfff
         ql.run(count=1000000)
+        
+        del ql
+
+class FRDMK64FTest(unittest.TestCase):
+    def qiling_common_setup(self, path):
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=mk64f12)
+
+        ql.hw.create('wdog')
+        ql.hw.create('sim')
+        ql.hw.create('porta')
+        ql.hw.create('portb')
+        ql.hw.create('osc')
+        ql.hw.create('mcg').watch()
+
+        return ql
+
+    def test_uart_sdk(self):        
+        ql = self.qiling_common_setup('../target/official/FRDM-K64F_UART_SDK.elf')
+
+        ql.hw.create('uart0').watch()        
+
+        ql.hw.uart0.send(b'BCDEF')
+        ql.run(count=10000)
+
+        self.assertTrue(ql.hw.uart0.recv() == b'ABCDEF')
+        del ql
+
+    # TODO: test uart with RIOT
+    def test_uart_riot(self):        
+        ql = self.qiling_common_setup('../target/other/FRDM-K64F_UART_RIOT.elf')
+        ql.hw.create('uart0').watch()        
+        ql.hw.create('smc')
         
         del ql
 
