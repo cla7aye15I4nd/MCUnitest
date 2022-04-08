@@ -1,12 +1,10 @@
-APPLICATION = adc
+APPLICATION = gpio
 
 BOARD ?= frdm-k64f
 
 RIOTBASE ?= $(CURDIR)/../../../library/RIOT
 
 USEMODULE += periph_gpio
-USEMODULE += periph_spi
-USEMODULE += periph_timer
 USEMODULE += periph_uart
 
 DISABLE_MODULE += cortexm_fpu
