@@ -213,10 +213,20 @@ class FRDMK64FTest(unittest.TestCase):
 
         ql.hw.create('wdog')
         ql.hw.create('sim')
+        ql.hw.create('osc')
+        ql.hw.create('mcg')
+
         ql.hw.create('porta')
         ql.hw.create('portb')
-        ql.hw.create('osc')
-        ql.hw.create('mcg').watch()
+        ql.hw.create('portc')
+        ql.hw.create('portd')
+        ql.hw.create('porte')
+
+        ql.hw.create('gpioa')
+        ql.hw.create('gpiob')
+        ql.hw.create('gpioc')
+        ql.hw.create('gpiod')
+        ql.hw.create('gpioe')        
 
         return ql
 
@@ -232,12 +242,32 @@ class FRDMK64FTest(unittest.TestCase):
         del ql
 
     # TODO: test uart with RIOT
+    @unittest.skip('')
     def test_uart_riot(self):        
         ql = self.qiling_common_setup('../target/other/FRDM-K64F_UART_RIOT.elf')
         ql.hw.create('uart0').watch()        
         ql.hw.create('smc')
         
         del ql
+
+    def test_adc_sdk(self):        
+        ql = self.qiling_common_setup('../target/official/FRDM-K64F_ADC_SDK.elf')
+        
+        ql.hw.create('adc0').watch()
+        ql.hw.create('uart0')
+        
+        ql.run(count=5000)
+        self.assertTrue(ql.hw.uart0.recv().startswith(b'ADC Value: '))
+
+    def test_adc_riot(self):        
+        ql = self.qiling_common_setup('../target/other/FRDM-K64F_ADC_RIOT.elf')
+        
+        ql.hw.create('adc0')
+        ql.hw.create('uart0')
+        
+        ql.run(count=10000)
+        self.assertTrue(ql.hw.uart0.recv().startswith(b'main(): This is RIOT! (Version: 2022.04-devel-1050-gfca56)\nadc = '))        
+        
 
 if __name__ == '__main__':
     unittest.main()
