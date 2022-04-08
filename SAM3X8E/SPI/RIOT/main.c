@@ -12,10 +12,11 @@ int main(void)
 
     for (int i = 0; i < 10; ++i) {
         data[0] = spi_transfer_byte(SPI_DEV(0), SPI_CS_UNDEF, false, data[0]);
-        printf("%c", data[0]);
+        printf("%c\n", data[0]);
     }
 
     spi_release(SPI_DEV(0));
+    printf("success\n");
    
     while(1) { };
     return 0;
