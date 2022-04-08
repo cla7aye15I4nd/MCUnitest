@@ -202,8 +202,11 @@ class SAM3X8ETest(unittest.TestCase):
         ql = self.qiling_common_setup('../target/other/SAM3X8E_SPI_RIOT.elf')                
         ql.hw.create('spi0').watch()
 
-        ql.hw.systick.ratio = 0xfff
-        ql.run(count=1000000)
+        ql.hw.spi0.send(b'bcdefghijk')
+        ql.run(count=100000)
+        
+        self.assertTrue(b'success' in ql.hw.uart.recv())
+        self.assertTrue(b'abcdefghij' == ql.hw.spi0.recv())        
         
         del ql
 
