@@ -246,12 +246,14 @@ class FRDMK64FTest(unittest.TestCase):
         self.assertTrue(ql.hw.uart0.recv() == b'ABCDEF')
         del ql
 
-    # TODO: test uart with RIOT
-    @unittest.skip('')
     def test_uart_riot(self):        
         ql = self.qiling_common_setup('../target/other/FRDM-K64F_UART_RIOT.elf')
         ql.hw.create('uart0').watch()        
         ql.hw.create('smc')
+
+        ql.hw.uart0.send(b'BCDEF')
+        ql.run(count=10000)
+        self.assertTrue(ql.hw.uart0.recv() == b'main(): This is RIOT! (Version: 2022.04-devel-1050-gfca56)\nABCDEF')
         
         del ql
 
