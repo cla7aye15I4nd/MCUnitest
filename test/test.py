@@ -188,13 +188,15 @@ class SAM3X8ETest(unittest.TestCase):
         ql.run(count=200000)        
         del ql
     
-    # TODO: spi transfer / receive
     def test_spi_arduino(self):
         ql = self.qiling_common_setup('../target/official/SAM3X8E_SPI_Arduino.elf')                
         ql.hw.create('spi0').watch()
 
-        ql.hw.systick.ratio = 0xfff
+        ql.hw.spi0.send(b'abcdefghij')
         ql.run(count=100000)
+        
+        self.assertTrue(b'\xeeabcdefghi' == ql.hw.spi0.recv())
+        self.assertTrue(b'abcdefghij' == ql.hw.uart.recv())  
 
         del ql
 
