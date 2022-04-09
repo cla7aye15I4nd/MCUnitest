@@ -138,6 +138,32 @@ class STM32F103Test(unittest.TestCase):
 
         del ql
 
+    def test_spi_cube(self):
+        ql = self.qiling_common_setup('../target/official/STM32F103RB_SPI_Cube.elf')
+
+        ql.hw.create('spi1')        
+        
+        ql.hw.spi1.send(b'BB')
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=10000)
+        
+        buf = ql.hw.spi1.recv()
+        self.assertTrue(b'A' in buf and b'B' in buf)
+
+        del ql
+
+    def test_spi_rust(self):
+        ql = self.qiling_common_setup('../target/other/STM32F103RB_SPI_Rust.elf')
+
+        ql.hw.create('spi1')        
+        ql.hw.create('usart2')        
+        
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=10000)
+
+        self.assertTrue(ql.hw.usart2.recv() == b'Success\n')
+        del ql
+
 class SAM3X8ETest(unittest.TestCase):
     def qiling_common_setup(self, path):
         ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=sam3x8e)
