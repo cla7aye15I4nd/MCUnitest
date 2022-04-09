@@ -15,8 +15,12 @@ class STM32F103Test(unittest.TestCase):
         ql.hw.create('rcc')
         ql.hw.create('flash interface')
         ql.hw.create('afio')
+        ql.hw.create('exti')
         ql.hw.create('gpioa')
         ql.hw.create('gpiob')
+        ql.hw.create('gpioc')
+        ql.hw.create('gpiod')
+        ql.hw.create('gpioe')
 
         return ql
 
@@ -63,6 +67,74 @@ class STM32F103Test(unittest.TestCase):
         
         ql.run(count=1000)        
         self.assertTrue(ql.hw.usart2.recv().startswith(b'adc1: '))
+
+        del ql
+
+    def test_pwm_cube(self):
+        ql = self.qiling_common_setup('../target/official/STM32F103RB_PWM_Cube.elf')
+
+        ql.hw.create('tim3')
+        ql.hw.create('usart2')
+        
+        flags = [0, 0]
+        def hook_set(): flags[0] = 1
+        def hook_rst(): flags[1] = 1
+
+        ql.hw.gpioa.hook_set(5, hook_set)
+        ql.hw.gpioa.hook_reset(5, hook_rst)
+        
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=250000)
+        self.assertTrue(flags[0] == 1 and flags[1] == 1)
+
+        del ql
+
+    def test_pwm_rust(self):
+        ql = self.qiling_common_setup('../target/other/STM32F103RB_PWM_Rust.elf')
+
+        ql.hw.create('tim2')
+        ql.hw.create('usart2')
+        
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=10000)        
+
+        del ql
+
+    def test_tim_cube(self):
+        ql = self.qiling_common_setup('../target/official/STM32F103RB_TIM_Cube.elf')
+
+        ql.hw.create('tim2')
+
+        counter = [0, 0]
+        def hook_set(): counter[0] += 1
+        def hook_rst(): counter[1] += 1
+
+        ql.hw.gpioa.hook_set(5, hook_set)
+        ql.hw.gpioa.hook_reset(5, hook_rst)
+        
+        ql.hw.tim2.ratio = 0xfff
+        ql.run(count=50000)
+
+        self.assertTrue(counter[0] > 10 and counter[1] > 10)
+
+        del ql
+
+    def test_tim_rust(self):
+        ql = self.qiling_common_setup('../target/other/STM32F103RB_TIM_Rust.elf')
+
+        ql.hw.create('tim2')
+
+        counter = [0, 0]
+        def hook_set(): counter[0] += 1
+        def hook_rst(): counter[1] += 1
+
+        ql.hw.gpioa.hook_set(5, hook_set)
+        ql.hw.gpioa.hook_reset(5, hook_rst)
+        
+        ql.hw.tim2.ratio = 0xfff
+        ql.run(count=50000)
+        
+        self.assertTrue(counter[0] > 10 and counter[1] > 10)
 
         del ql
 
@@ -239,8 +311,8 @@ class SAM3X8ETest(unittest.TestCase):
         
         del ql
 
+    # FIXME: some bugs here
     def test_tim_riot(self):
-        # FIXME: some bugs here
         ql = self.qiling_common_setup('../target/other/SAM3X8E_TIM_RIOT.elf')                
         ql.hw.create('tc0').watch()
         
