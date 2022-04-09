@@ -3,8 +3,45 @@ sys.path.append('../../qiling')
 
 from qiling.core import Qiling
 from qiling.const import QL_VERBOSE
+from qiling.extensions.mcu.stm32f1 import stm32f103
 from qiling.extensions.mcu.atmel import sam3x8e
 from qiling.extensions.mcu.nxp import mk64f12
+
+
+class STM32F103Test(unittest.TestCase):
+    def qiling_common_setup(self, path):
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=stm32f103)
+
+        ql.hw.create('rcc')
+        ql.hw.create('flash interface')
+        ql.hw.create('afio')
+        ql.hw.create('gpioa')
+
+        return ql
+
+    def test_uart_cube(self):
+        ql = self.qiling_common_setup('../target/official/STM32F103RB_USART_Cube.elf')
+
+        ql.hw.create('usart2')
+        ql.hw.usart2.send(b'B')
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=10000)
+        
+        self.assertTrue(ql.hw.usart2.recv().startswith(b'ABB'))
+
+        del ql
+
+    def test_uart_rust(self):
+        ql = self.qiling_common_setup('../target/other/STM32F103RB_USART_Rust.elf')
+
+        ql.hw.create('usart2')
+        ql.hw.usart2.send(b'_YZ')
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=10000)
+
+        print(ql.hw.usart2.recv() == b'XYZ')
+
+        del ql
 
 
 class SAM3X8ETest(unittest.TestCase):
@@ -266,6 +303,8 @@ class FRDMK64FTest(unittest.TestCase):
         ql.run(count=5000)
         self.assertTrue(ql.hw.uart0.recv().startswith(b'ADC Value: '))
 
+        del ql
+
     def test_adc_riot(self):        
         ql = self.qiling_common_setup('../target/other/FRDM-K64F_ADC_RIOT.elf')
         
@@ -274,6 +313,8 @@ class FRDMK64FTest(unittest.TestCase):
         
         ql.run(count=10000)
         self.assertTrue(ql.hw.uart0.recv().startswith(b'main(): This is RIOT! (Version: 2022.04-devel-1050-gfca56)\nadc = '))        
+
+        del ql
         
     def test_gpio_sdk(self):
         ql = self.qiling_common_setup('../target/official/FRDM-K64F_GPIO_SDK.elf')
