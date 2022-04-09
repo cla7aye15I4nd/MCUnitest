@@ -16,6 +16,7 @@ class STM32F103Test(unittest.TestCase):
         ql.hw.create('flash interface')
         ql.hw.create('afio')
         ql.hw.create('gpioa')
+        ql.hw.create('gpiob')
 
         return ql
 
@@ -43,6 +44,27 @@ class STM32F103Test(unittest.TestCase):
 
         del ql
 
+    def test_adc_cube(self):
+        ql = self.qiling_common_setup('../target/official/STM32F103RB_ADC_Cube.elf')
+
+        ql.hw.create('adc1')
+        ql.hw.create('usart2')
+        
+        ql.run(count=5000)        
+        self.assertTrue(ql.hw.usart2.startswith(b'adc_value = '))
+
+        del ql
+
+    def test_adc_rust(self):
+        ql = self.qiling_common_setup('../target/other/STM32F103RB_ADC_Rust.elf')
+
+        ql.hw.create('adc1')
+        ql.hw.create('usart2')
+        
+        ql.run(count=1000)        
+        self.assertTrue(ql.hw.usart2.recv().startswith(b'adc1: '))
+
+        del ql
 
 class SAM3X8ETest(unittest.TestCase):
     def qiling_common_setup(self, path):
