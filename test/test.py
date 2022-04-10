@@ -4,8 +4,58 @@ sys.path.append('../../qiling')
 from qiling.core import Qiling
 from qiling.const import QL_VERBOSE
 from qiling.extensions.mcu.stm32f1 import stm32f103
+from qiling.extensions.mcu.stm32f4 import stm32f429
 from qiling.extensions.mcu.atmel import sam3x8e
 from qiling.extensions.mcu.nxp import mk64f12
+
+
+class STM32F429Test(unittest.TestCase):
+    def qiling_common_setup(self, path):
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=stm32f429)
+
+        ql.hw.create('rcc')
+        ql.hw.create('flash interface')
+        ql.hw.create('pwr')
+        ql.hw.create('exti')
+        ql.hw.create('syscfg')
+        ql.hw.create('gpioa')
+        ql.hw.create('gpiob')
+        ql.hw.create('gpioc')
+
+        return ql
+
+    def test_dac_cube(self):
+        ql = self.qiling_common_setup('../target/official/STM32F429ZI_DAC_Cube.elf')
+        ql.hw.create('dac1')
+        
+        counter = False
+        def hook_set(): 
+            nonlocal counter
+            counter += 1
+
+        ql.hw.gpiob.hook_set(0, hook_set)
+        ql.hw.systick.ratio = 0xfff
+        ql.run(count=100000)
+        self.assertTrue(counter > 2)
+
+        del ql
+
+    ## TODO: Handle Interrupt
+    def test_gpio_cube(self):
+        ql = self.qiling_common_setup('../target/official/STM32F429ZI_GPIO_Cube.elf')
+        
+        ql.run(count=3000)
+
+        for i in range(5):
+            ql.hw.gpioc.set_pin(13)
+            ql.run(count=100)
+            self.assertTrue(ql.hw.gpiob.pin(7))
+
+            ql.hw.gpioc.reset_pin(13)
+            ql.run(count=100)
+            self.assertFalse(ql.hw.gpiob.pin(7))     
+        
+        del ql
 
 
 class STM32F103Test(unittest.TestCase):
