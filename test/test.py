@@ -10,7 +10,7 @@ from qiling.extensions.mcu.nxp import mk64f12
 
 class STM32F103Test(unittest.TestCase):
     def qiling_common_setup(self, path):
-        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=stm32f103)
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=stm32f103, verbose=QL_VERBOSE.DISABLED)
 
         ql.hw.create('rcc')
         ql.hw.create('flash interface')
@@ -44,7 +44,7 @@ class STM32F103Test(unittest.TestCase):
         ql.hw.systick.ratio = 0xfff
         ql.run(count=10000)
 
-        print(ql.hw.usart2.recv() == b'XYZ')
+        self.assertTrue(ql.hw.usart2.recv() == b'XYZ')
 
         del ql
 
@@ -55,7 +55,7 @@ class STM32F103Test(unittest.TestCase):
         ql.hw.create('usart2')
         
         ql.run(count=5000)        
-        self.assertTrue(ql.hw.usart2.startswith(b'adc_value = '))
+        self.assertTrue(ql.hw.usart2.recv().startswith(b'adc_value = '))
 
         del ql
 
@@ -166,7 +166,7 @@ class STM32F103Test(unittest.TestCase):
 
 class SAM3X8ETest(unittest.TestCase):
     def qiling_common_setup(self, path):
-        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=sam3x8e)
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=sam3x8e, verbose=QL_VERBOSE.DISABLED)
         
         ql.hw.create('wdt')
         ql.hw.create('efc0')
@@ -184,8 +184,7 @@ class SAM3X8ETest(unittest.TestCase):
         return ql
 
     def test_uart_arduino(self):
-        ql = self.qiling_common_setup('../target/official/SAM3X8E_UART_Arduino.elf')
-        ql.hw.uart.watch()
+        ql = self.qiling_common_setup('../target/official/SAM3X8E_UART_Arduino.elf')        
         
         ql.hw.uart.send(b'BCDE')
         ql.run(count=100000)
@@ -195,7 +194,7 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_uart_riot(self):
         ql = self.qiling_common_setup('../target/other/SAM3X8E_UART_RIOT.elf')
-        ql.hw.uart.watch()
+
 
         ql.hw.uart.send(b'BCDE')
         ql.run(count=100000)
@@ -205,7 +204,6 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_adc_arduino(self):
         ql = self.qiling_common_setup('../target/official/SAM3X8E_ADC_Arduino.elf')
-        ql.hw.adc.watch()
 
         ql.run(count=100000)
         self.assertTrue(ql.hw.uart.recv().startswith(b'5.00\r\n5.00\r\n'))
@@ -213,7 +211,6 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_adc_riot(self):
         ql = self.qiling_common_setup('../target/other/SAM3X8E_ADC_RIOT.elf')
-        ql.hw.adc.watch()
 
         ql.run(count=100000)
         self.assertTrue(ql.hw.uart.recv().startswith(b'main(): This is RIOT! (Version: 2022.04-devel-1050-gfca56)\nadc = 4095\n'))
@@ -225,11 +222,9 @@ class SAM3X8ETest(unittest.TestCase):
 
         flags = [False, False]
         def hook_set():
-            print("LED on")
             flags[0] = True
         
         def hook_rst():
-            print("LED off")
             flags[1] = True
 
         ql.hw.piob.hook_set  (27, hook_set)
@@ -244,7 +239,7 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_dac_riot(self):
         ql = self.qiling_common_setup('../target/other/SAM3X8E_DAC_RIOT.elf')
-        ql.hw.create('dac').watch()
+        ql.hw.create('dac')
 
         ql.hw.systick.ratio = 0xfff
         ql.run(count=200000)
@@ -254,7 +249,7 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_gpio_arduino(self):
         ql = self.qiling_common_setup('../target/official/SAM3X8E_GPIO_Arduino.elf')        
-        # ql.hw.piob.watch()
+
 
         status = 0
         def hook_set():
@@ -309,7 +304,7 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_pwm_arduino(self):
         ql = self.qiling_common_setup('../target/official/SAM3X8E_PWM_Arduino.elf')                
-        ql.hw.create('tc0').watch()
+        ql.hw.create('tc0')
 
         ql.hw.systick.ratio = 0xfff
         ql.run(count=20000)
@@ -318,7 +313,7 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_pwm_riot(self):
         ql = self.qiling_common_setup('../target/other/SAM3X8E_PWM_RIOT.elf')                
-        ql.hw.create('pwm').watch()
+        ql.hw.create('pwm')
 
         ql.hw.systick.ratio = 0xfff
         ql.run(count=20000)
@@ -329,8 +324,8 @@ class SAM3X8ETest(unittest.TestCase):
         ql = self.qiling_common_setup('../target/official/SAM3X8E_TIM_Arduino.elf')                
         
         
-        ql.hw.piob.hook_set  (27, lambda : print('LED on'))
-        ql.hw.piob.hook_reset(27, lambda : print('LED off'))
+        # ql.hw.piob.hook_set  (27, lambda : print('LED on'))
+        # ql.hw.piob.hook_reset(27, lambda : print('LED off'))
 
         ql.hw.systick.ratio = 0xfff        
         ql.run(count=30000)
@@ -340,14 +335,14 @@ class SAM3X8ETest(unittest.TestCase):
     # FIXME: some bugs here
     def test_tim_riot(self):
         ql = self.qiling_common_setup('../target/other/SAM3X8E_TIM_RIOT.elf')                
-        ql.hw.create('tc0').watch()
+        ql.hw.create('tc0')
         
         ql.run(count=200000)        
         del ql
     
     def test_spi_arduino(self):
         ql = self.qiling_common_setup('../target/official/SAM3X8E_SPI_Arduino.elf')                
-        ql.hw.create('spi0').watch()
+        ql.hw.create('spi0')
 
         ql.hw.spi0.send(b'abcdefghij')
         ql.run(count=100000)
@@ -359,7 +354,7 @@ class SAM3X8ETest(unittest.TestCase):
 
     def test_spi_riot(self):
         ql = self.qiling_common_setup('../target/other/SAM3X8E_SPI_RIOT.elf')                
-        ql.hw.create('spi0').watch()
+        ql.hw.create('spi0')
 
         ql.hw.spi0.send(b'bcdefghijk')
         ql.run(count=100000)
@@ -371,7 +366,7 @@ class SAM3X8ETest(unittest.TestCase):
 
 class FRDMK64FTest(unittest.TestCase):
     def qiling_common_setup(self, path):
-        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=mk64f12)
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=mk64f12, verbose=QL_VERBOSE.DISABLED)
 
         ql.hw.create('wdog')
         ql.hw.create('sim')
@@ -395,7 +390,7 @@ class FRDMK64FTest(unittest.TestCase):
     def test_uart_sdk(self):        
         ql = self.qiling_common_setup('../target/official/FRDM-K64F_UART_SDK.elf')
 
-        ql.hw.create('uart0').watch()        
+        ql.hw.create('uart0')        
 
         ql.hw.uart0.send(b'BCDEF')
         ql.run(count=10000)
@@ -405,7 +400,7 @@ class FRDMK64FTest(unittest.TestCase):
 
     def test_uart_riot(self):        
         ql = self.qiling_common_setup('../target/other/FRDM-K64F_UART_RIOT.elf')
-        ql.hw.create('uart0').watch()        
+        ql.hw.create('uart0')        
         ql.hw.create('smc')
 
         ql.hw.uart0.send(b'BCDEF')
@@ -417,7 +412,7 @@ class FRDMK64FTest(unittest.TestCase):
     def test_adc_sdk(self):        
         ql = self.qiling_common_setup('../target/official/FRDM-K64F_ADC_SDK.elf')
         
-        ql.hw.create('adc0').watch()
+        ql.hw.create('adc0')
         ql.hw.create('uart0')
         
         ql.run(count=5000)
@@ -477,4 +472,4 @@ class FRDMK64FTest(unittest.TestCase):
         del ql    
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
