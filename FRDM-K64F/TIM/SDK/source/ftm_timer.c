@@ -45,7 +45,7 @@ int main(void)
 {
     uint32_t cnt;
     uint32_t loop       = 2U;
-    uint32_t secondLoop = 1000U;
+    uint32_t secondLoop = 100U;
     const char *signals = "-|";
     ftm_config_t ftmInfo;
 
