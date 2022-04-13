@@ -54,7 +54,6 @@ int main(void)
     BOARD_InitDebugConsole();
 
     uint32_t srcClock_Hz;
-    uint32_t errorCount;
     uint32_t loopCount = 1U;
     uint32_t i;
     dspi_master_config_t masterConfig;
@@ -91,11 +90,11 @@ int main(void)
     }
 
     /* Start master transfer, send data to slave */
-    masterXfer.txData      = masterTxData;
-    masterXfer.rxData      = NULL;
+    masterXfer.txData      = NULL;
+    masterXfer.rxData      = masterRxData;
     masterXfer.dataSize    = TRANSFER_SIZE;
     masterXfer.configFlags = kDSPI_MasterCtar0 | EXAMPLE_DSPI_MASTER_PCS_FOR_TRANSFER | kDSPI_MasterPcsContinuous;
-    DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);
+    DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);  
 
     /* Start master transfer, receive data from slave */
     masterXfer.txData      = NULL;
@@ -103,8 +102,20 @@ int main(void)
     masterXfer.dataSize    = TRANSFER_SIZE;
     masterXfer.configFlags = kDSPI_MasterCtar0 | EXAMPLE_DSPI_MASTER_PCS_FOR_TRANSFER | kDSPI_MasterPcsContinuous;
     DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);
+    PRINTF("Sucessfully run dspi polling example.\r\n");
 
     while (1)
     {   
+        masterXfer.txData      = NULL;
+        masterXfer.rxData      = masterRxData;
+        masterXfer.dataSize    = TRANSFER_SIZE;
+        masterXfer.configFlags = kDSPI_MasterCtar0 | EXAMPLE_DSPI_MASTER_PCS_FOR_TRANSFER | kDSPI_MasterPcsContinuous;
+        DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);
+
+        masterXfer.txData      = NULL;
+        masterXfer.rxData      = masterRxData;
+        masterXfer.dataSize    = TRANSFER_SIZE;
+        masterXfer.configFlags = kDSPI_MasterCtar0 | EXAMPLE_DSPI_MASTER_PCS_FOR_TRANSFER | kDSPI_MasterPcsContinuous;
+        DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);
     }
 }
