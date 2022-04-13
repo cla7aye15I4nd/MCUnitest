@@ -90,8 +90,8 @@ int main(void)
     }
 
     /* Start master transfer, send data to slave */
-    masterXfer.txData      = NULL;
-    masterXfer.rxData      = masterRxData;
+    masterXfer.txData      = masterTxData;
+    masterXfer.rxData      = NULL;
     masterXfer.dataSize    = TRANSFER_SIZE;
     masterXfer.configFlags = kDSPI_MasterCtar0 | EXAMPLE_DSPI_MASTER_PCS_FOR_TRANSFER | kDSPI_MasterPcsContinuous;
     DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);  
@@ -106,14 +106,14 @@ int main(void)
 
     while (1)
     {   
-        masterXfer.txData      = NULL;
+        masterXfer.txData      = masterTxData;
         masterXfer.rxData      = masterRxData;
         masterXfer.dataSize    = TRANSFER_SIZE;
         masterXfer.configFlags = kDSPI_MasterCtar0 | EXAMPLE_DSPI_MASTER_PCS_FOR_TRANSFER | kDSPI_MasterPcsContinuous;
         DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);
 
-        masterXfer.txData      = NULL;
-        masterXfer.rxData      = masterRxData;
+        masterXfer.txData      = masterRxData;
+        masterXfer.rxData      = masterTxData;
         masterXfer.dataSize    = TRANSFER_SIZE;
         masterXfer.configFlags = kDSPI_MasterCtar0 | EXAMPLE_DSPI_MASTER_PCS_FOR_TRANSFER | kDSPI_MasterPcsContinuous;
         DSPI_MasterTransferBlocking(EXAMPLE_DSPI_MASTER_BASEADDR, &masterXfer);
