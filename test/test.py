@@ -416,10 +416,11 @@ class SAM3X8ETest(unittest.TestCase):
 
 class FRDMK64FTest(unittest.TestCase):
     def qiling_common_setup(self, path):
-        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=mk64f12, verbose=QL_VERBOSE.DISABLED)
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=mk64f12)#, verbose=QL_VERBOSE.DISABLED)
 
         ql.hw.create('wdog')
         ql.hw.create('sim')
+        ql.hw.create('smc')
         ql.hw.create('osc')
         ql.hw.create('mcg')
 
@@ -520,6 +521,34 @@ class FRDMK64FTest(unittest.TestCase):
             self.assertFalse(ql.hw.gpiob.pin(22))
 
         del ql    
+
+    def test_spi_sdk(self):
+        ql = self.qiling_common_setup('../target/official/FRDM-K64F_SPI_SDK.elf')
+        
+        ql.hw.create('spi0')
+        ql.hw.create('uart0')
+
+        ql.hw.spi0.send(b'____abcdefghi')
+        ql.run(count=30000)
+        self.assertTrue(ql.hw.uart0.recv() == b'Sucessfully run dspi polling example.\r\n')
+
+        resp = ql.hw.spi0.recv()
+        self.assertTrue(all(b in resp for b in b'\x01\x02abcdefghi'))
+        
+        del ql
+
+    def test_spi_riot(self):
+        ql = self.qiling_common_setup('../target/other/FRDM-K64F_SPI_RIOT.elf')
+        
+        ql.hw.create('rtc')
+        ql.hw.create('spi0').watch()
+        ql.hw.create('uart0')
+
+        ql.hw.spi0.send(b'____abcdefghi')
+        ql.run(count=10000)
+        self.assertTrue(b'a' == ql.hw.spi0.recv())
+        
+        del ql
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
