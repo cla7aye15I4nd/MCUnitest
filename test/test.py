@@ -416,7 +416,7 @@ class SAM3X8ETest(unittest.TestCase):
 
 class FRDMK64FTest(unittest.TestCase):
     def qiling_common_setup(self, path):
-        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=mk64f12)#, verbose=QL_VERBOSE.DISABLED)
+        ql = Qiling([path], archtype="cortex_m", ostype="mcu", env=mk64f12, verbose=QL_VERBOSE.DISABLED)
 
         ql.hw.create('wdog')
         ql.hw.create('sim')
