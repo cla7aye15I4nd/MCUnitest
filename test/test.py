@@ -550,5 +550,25 @@ class FRDMK64FTest(unittest.TestCase):
         
         del ql
 
+    def test_tim_sdk(self):
+        ql = self.qiling_common_setup('../target/official/FRDM-K64F_TIM_SDK.elf')
+        
+        ql.hw.create('uart0')
+        ql.hw.create('ftm0')
+        
+        ql.hw.ftm0.ratio = 0xffff
+        ql.run(count=30000)
+        self.assertTrue(ql.hw.uart0.recv().startswith(
+            b'\r\nFTM example to simulate a timer\r\n\r\nYou will see a "-" or "|" in terminal every 1 second:\r\n-|-|'
+        ))
+        
+        del ql
+
+    @unittest.skip("The firmware maybe wrong")
+    def test_tim_riot(self):
+        ql = self.qiling_common_setup('../target/other/FRDM-K64F_TIM_RIOT.elf')
+
+        del ql
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
