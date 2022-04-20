@@ -15,6 +15,7 @@ ql = Qiling(["../build/bof.elf"], archtype="cortex_m", env=stm32f429, ostype='mc
 ql.hw.create('rcc')
 ql.hw.create('usart2')
 ql.hw.create('usart3')
+ql.os.grain_size = 100
 
 snapshot = ql.save(hw=True)
 
