@@ -39,7 +39,10 @@ def main(input_file: str):
         return True
 
     def fuzzing_callback(ql: Qiling):
-        ql.run(count=20000)
+        try:
+            ql.run(count=20000)
+        except:
+            os.abort()
 
         return UC_ERR_OK
 
