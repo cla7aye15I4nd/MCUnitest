@@ -20,7 +20,7 @@ ql.os.grain_size = 100
 snapshot = ql.save(hw=True)
 
 ql.restore(snapshot)
-ql.hw.usart3.send(b'abc\n')
+ql.hw.usart3.send(b'hbckme\nabc\n')
 ql.run(count=20000)
 
 print('[Normal]')
@@ -28,8 +28,8 @@ print('USART2 Output:', ql.hw.usart2.recv())
 print('USART3 Output:', ql.hw.usart3.recv())
 
 ql.restore(snapshot)
-ql.hw.usart3.send(b'aaaaaaaaaaaaaaaaaaaa\x89\x05\n')
-ql.run(count=20000)
+ql.hw.usart3.send(b'hackme\naaaaaaaaaaaaaaaaaaaa\xa9\x05\n')
+ql.run(count=40000)
 
 print('[Overflow]')
 print('USART2 Output:', ql.hw.usart2.recv())

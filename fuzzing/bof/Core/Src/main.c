@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "retarget.h"
+#include <string.h>
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -104,9 +105,18 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   RetargetInit(&huart3);
+
+  char inputs[0x10];
+  char passwd[0x10] = "hackme";
   
-  if (hack_ptr)
-    vuln();
+  scanf("%16s\n", inputs);
+  if (strcmp(inputs, passwd) == 0) {
+    puts("Welcome to the world of Hacking!");
+    if (hack_ptr) vuln();
+  } else {
+    puts("Wrong password!");
+  }
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
